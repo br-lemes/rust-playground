@@ -1,4 +1,5 @@
 use std::env;
+use std::process::Command;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -7,5 +8,8 @@ fn main() {
     } else {
         String::from("world")
     };
-    println!("Hello, {}!", who);
+    Command::new("cowsay")
+        .arg(format!("Hello, {}!", who))
+        .spawn()
+        .expect("failed to execute process");
 }
